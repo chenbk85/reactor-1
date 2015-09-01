@@ -53,7 +53,6 @@ public:
   virtual int handle_output(const int /*handle*/)       { return -1; }
   virtual int handle_exception(const int /*handle*/)    { return -1; }
   virtual int handle_timeout(const time_value &/*now*/) { return -1; }
-  virtual int handle_fsmodify(const char * /*flename*/) { return -1; }
 
   virtual int handle_close(const int /*handle*/, reactor_mask /*mask*/)
   { return -1; }

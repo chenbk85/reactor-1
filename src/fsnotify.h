@@ -17,6 +17,8 @@
 class reactor;
 class mblock;
 
+#define MAX_NOTIFY_PATHNAME_LEN  255
+
 /**
  * @class fsnotify
  *
@@ -33,7 +35,7 @@ public:
   fsnotify();
   ~fsnotify();
 
-  int open(reactor *r);
+  int open(const int max_wd_size, reactor *r);
   void close();
 
   // On success, return a non-negative watch descriptor
@@ -43,15 +45,19 @@ public:
   // On success, return zero, or -1 if an error occurred
   int rm_watch(const int wd);
 
+  const char *pathname(const int wd);
+
   //= virtual method
   virtual int get_handle() const { return this->inotify_fd_; }
   virtual int handle_input(const int );
 
   //= 
   // 'rm_watch' will be called if below handle_* return -1. 
-  virtual int handle_fs_close_write(const char * /*name*/) { return -1; }
+  virtual int handle_fs_close_write(const int , const char * /*name*/) { return -1; }
 private:
+  int max_wd_size_;
   int inotify_fd_;
+  char **wd_pathname_;
   mblock *read_buff_;
 };
 #endif // FSNOTIFY_H_
