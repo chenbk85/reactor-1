@@ -162,7 +162,7 @@ public:
     ::strftime(str, len, "%Y-%m-%d", &this->tm_);
     if (len > 11) // length of "2000-12-12" = 10
       len = 11;
-    str[len-1] = '\0';
+    str[len - 1] = '\0';
     return str;
   }
 
@@ -173,7 +173,7 @@ public:
     ::strftime(str, len, "%H:%M:%S", &this->tm_);
     if (len > 9) // length of "23:23:23" = 8
       len = 9;
-    str[len-1] = '\0';
+    str[len - 1] = '\0';
     return str;
   }
 
